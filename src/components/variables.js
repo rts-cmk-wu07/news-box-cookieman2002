@@ -1,10 +1,7 @@
 export const vars = {
-    dark: {
+  primary_1: "#87BCBF",
+  primary_3: "#324755",
 
-        primary_1: "#87BCBF",
-        primary_3: "#324755",
-    },
-    
   primary_2: "#D97D54",
   primary_4: "#D95454",
 

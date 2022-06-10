@@ -10,8 +10,8 @@ function App() {
   });
   return (
     <ThemeContext.Provider value={{ isSwitch, setIsSwitch }}>
-      <div className={isSwitch.darkmode ? "dark-mode" : ""}>
-        <Navbar />
+      <Navbar />
+      <div className={isSwitch.darkmode ? "dark-mode" : "light-mode"}>
         <Outlet />
       </div>
     </ThemeContext.Provider>

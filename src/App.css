@@ -1,5 +1,5 @@
 * {
-  margin: 0 auto;
+  margin: 0;
   box-sizing: border-box;
 }
 
@@ -7,8 +7,14 @@
   text-align: center;
 }
 .dark-mode {
-  background-color: #324755;
+  background-color: #1b1c20;
   color: #fff;
+  transition-duration: 1s;
+}
+.light-mode {
+  background-color: #ffffff;
+  color: #1b1c20;
+  transition-duration: 1s;
 }
 
 .App-logo {
