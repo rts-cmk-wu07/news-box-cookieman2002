@@ -4,10 +4,18 @@ import { Link } from "react-router-dom";
 import { vars } from "./variables";
 import { ThemeContext } from "../contexts/context";
 import { useContext } from "react";
-import Cat from "./Cat";
+import Card from "./Card";
+import Usefetch from "../hooks/Usefetch";
 
 const Section = ({ posts, title }) => {
   const { isSwitch } = useContext(ThemeContext);
+  const key = "PorNsbssWGT719UfIj07BezGGZ1kzBHK";
+  const { data } =
+    Usefetch(`https://api.nytimes.com/svc/topstories/v2/${posts}.json?api-key=${key}
+    `);
+
+  const spreadData = [...new Set(posts.map((article) => article.section))];
+  console.log();
 
   const styles = {
     postlist: css`
@@ -20,6 +28,7 @@ const Section = ({ posts, title }) => {
     `,
     post: css`
       display: flex;
+      flex-direction: column;
       justify-content: flex-start;
       align-items: center;
       gap: 10px;
@@ -38,40 +47,35 @@ const Section = ({ posts, title }) => {
       align-self: center;
     `,
   };
-  console.log(posts);
-  const sorted = posts.sort((a, b) => {
-    if (a.section < b.section) {
-      return -1;
-    }
-    if (a.section > b.section) {
-      return 1;
-    }
-    return 0;
-  });
 
   // const titles = [...new Set(sorted.map((article) => article.section))];  // console.log(titles);
-  const spreadData = [...new Set(posts.map((article) => article.subsection))];
-  console.log(spreadData);
+
+  // const searched = data.filter((el) => {
+  //   if (posts.input === "") {
+  //     return el;
+  //   } else return el.text.toLowerCase().includes(posts.input);
+  // });
 
   return (
     <div css={styles.postlist}>
-      {spreadData}
       <h2 css={styles.title}>{title}</h2>
-      {posts.map((article, index) => (
+      {spreadData.map((title, index) => (
         <div key={index} css={styles.post}>
-          <h2>{spreadData[index]}</h2>  
+          <h2>{title}</h2>
+          {data.section == title && <Card items={title}  /> }
         </div>
       ))}
     </div>
   );
 };
+// const sorted = posts.sort((a, b) => {
+//   if (a.section < b.section) {
+//     return -1;
+//   }
+//   if (a.section > b.section) {
+//     return 1;
+//   }
+//   return 0;
+// });
 
-{
-  /* <img src={article.multimedia[0].url} alt="" />
-<div>
-  <h2>{article.title}</h2>
-
-  <p>published {article.published_date}</p>
-</div> */
-}
 export default Section;

@@ -1,18 +1,35 @@
-const card = ({item}) => {
-    
-    
-    return ( <>
-    {item.map((val) => {
-        <div key={val.created_date}>
-            <img src={val.multimedia[0].url} alt="" />
-            <div>
-                <h2>{val.title}</h2>
-                <p>{val.created}</p>
-            </div>
-        </div>
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 
-    })}
-    </> );
-}
- 
-export default card;
+const Card = ({ items, image }) => {
+  const styles = {
+    card: css`
+      display: flex;
+      justify-content: flex-start;
+    `,
+  };
+  console.log(items.multimedia);
+
+//   const checkImage = (media) => {
+//     if (!media == undefined) {
+//       return <img src={media.url} alt="placeholder" />;
+//     }
+//     return <span>No image</span>;
+//   };
+
+  return (
+    <div>
+      {items.map((item, index) => (
+        <div key={index} css={styles.card}>
+          {/* {checkImage(item.multimedia[0])} */}
+          <div>
+            <h2>{item.title}</h2>
+            <p>published {item.published_date}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Card;

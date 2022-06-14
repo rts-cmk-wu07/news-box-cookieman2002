@@ -34,6 +34,7 @@ const Navbar = () => {
       display: flex;
       align-items: center;
       color: ${vars.typo_2};
+      text-decoration: none;
       transition-duration: 1s;
     `,
   };
@@ -45,8 +46,9 @@ const Navbar = () => {
           stroke={isSwitch.darkmode ? "white" : "black"}
         />
       </Link>
-
-      <h1>Newsbox</h1>
+      <Link to="indbox" css={styles.links}>
+        <h1>Newsbox</h1>
+      </Link>
 
       <LightSwitch
         css={styles.lightSwitch}
