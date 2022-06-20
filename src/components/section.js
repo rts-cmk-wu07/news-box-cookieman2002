@@ -3,6 +3,14 @@ import { css } from "@emotion/react";
 import { vars } from "./variables";
 import { ThemeContext } from "../contexts/context";
 import { useContext, useState } from "react";
+import {
+  LeadingActions,
+  SwipeableList,
+  SwipeableListItem,
+  SwipeAction,
+} from "react-swipeable-list";
+import "react-swipeable-list/dist/styles.css";
+
 // import { useSwipeable } from "react-swipeable";
 // import { LeadingActions } from "react-swipeable-list";
 
@@ -47,6 +55,7 @@ const Section = ({ posts, title }) => {
     `,
   };
   const [query, setQuery] = useState("");
+  var storedata = [];
   // const handlers = useSwipeable({ onSwipedLeft: () => console.log("swiped") });
 
   let topics = posts.map((topic) => topic.section);
@@ -64,6 +73,23 @@ const Section = ({ posts, title }) => {
       // console.log("image:" + image.url);
       return <img src={image.url} alt="" />;
     }
+  };
+
+  const archiveitem = (archive) => {
+    const archived = [
+      {
+        title: archive.title,
+        publish: archive.published_date,
+        subsection: archive.subsection,
+        section: archive.section,
+        image: (archive.multimedia !== null && archive.multimedia[0].url) || (
+          <div>No image </div>
+        ),
+      },
+    ];
+    console.log(archived);
+    localStorage.setItem(archive.published_date, JSON.stringify(archived));
+    storedata.push(archived);
   };
 
   return (
@@ -91,16 +117,29 @@ const Section = ({ posts, title }) => {
             {posts.map(
               (story, index) =>
                 story.section === topic && (
-                  
                   <div key={index} css={styles.post}>
-                    {(story.multimedia !== null &&
-                      imagesfix(story.multimedia[0])) || <div>No image </div>}
-                    {/* {imagesfix(story.multimedia[0])} */}
-                    <div>
-                      <h2>{story.title}</h2>
-                      <p>{story.subsection}</p>
-                      <p>{story.published_date}</p>
-                    </div>
+                    <SwipeableList>
+                      <SwipeableListItem
+                        leadingActions={
+                          <LeadingActions>
+                            <SwipeAction onClick={() => archiveitem(story)}>
+                              Archive
+                            </SwipeAction>
+                          </LeadingActions>
+                        }
+                      >
+                        {(story.multimedia !== null &&
+                          imagesfix(story.multimedia[0])) || (
+                          <div>No image </div>
+                        )}
+                        {/* {imagesfix(story.multimedia[0])} */}
+                        <div>
+                          <h2>{story.title}</h2>
+                          <p>{story.subsection}</p>
+                          <p>{story.published_date}</p>
+                        </div>
+                      </SwipeableListItem>
+                    </SwipeableList>
                   </div>
                 )
             )}
