@@ -17,6 +17,11 @@ import "react-swipeable-list/dist/styles.css";
 const Section = ({ posts, title }) => {
   const { isSwitch } = useContext(ThemeContext);
   const styles = {
+    archive: css`
+      background-color: green;
+      font-size: 20px;
+      color: ${isSwitch.darkmode ? vars.typo_3 : "black"};
+    `,
     postlist: css`
       display: flex;
       flex-direction: column;
@@ -76,20 +81,16 @@ const Section = ({ posts, title }) => {
   };
 
   const archiveitem = (archive) => {
-    const archived = [
-      {
-        title: archive.title,
-        publish: archive.published_date,
-        subsection: archive.subsection,
-        section: archive.section,
-        image: (archive.multimedia !== null && archive.multimedia[0].url) || (
-          <div>No image </div>
-        ),
-      },
-    ];
-    console.log(archived);
+    const archived = {
+      title: archive.title,
+      publish: archive.published_date,
+      subsection: archive.subsection,
+      section: archive.section,
+      image: (archive.multimedia !== null && archive.multimedia[0].url) || (
+        <div>No image </div>
+      ),
+    };
     localStorage.setItem(archive.published_date, JSON.stringify(archived));
-    storedata.push(archived);
   };
 
   return (
@@ -122,7 +123,10 @@ const Section = ({ posts, title }) => {
                       <SwipeableListItem
                         leadingActions={
                           <LeadingActions>
-                            <SwipeAction onClick={() => archiveitem(story)}>
+                            <SwipeAction
+                              css={styles.archive}
+                              onClick={() => archiveitem(story)}
+                            >
                               Archive
                             </SwipeAction>
                           </LeadingActions>

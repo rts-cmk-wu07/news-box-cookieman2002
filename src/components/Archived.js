@@ -1,10 +1,10 @@
 const Archived = ({ posts }) => {
-  let topics = posts.map((topic) => topic.section);
+  for (let i = 0; i < posts.length; i++) {
+    const key = posts.key(i);
+  }
+  console.log(posts.length);
 
-  let sortedTopics = topics.filter((element, index) => {
-    return topics.indexOf(element) === index;
-  });
-  return <div>{sortedTopics.map((element, index) => {})}</div>;
+  return <div></div>;
 };
 
 export default Archived;

@@ -6,6 +6,8 @@ import LightSwitch from "./Lightswitch";
 import { ThemeContext } from "../contexts/context";
 import { useContext } from "react";
 import { vars } from "./variables";
+import { stack as Menu } from "react-burger-menu";
+import Setting from "./Setting";
 
 const Navbar = () => {
   const { isSwitch } = useContext(ThemeContext);
@@ -50,16 +52,10 @@ const Navbar = () => {
         <h1>Newsbox</h1>
       </Link>
 
-      <LightSwitch
-        css={styles.lightSwitch}
-        button={
-          isSwitch.darkmode ? (
-            <FeatherIcon icon="toggle-right" />
-          ) : (
-            <FeatherIcon icon="toggle-left" />
-          )
-        }
-      />
+      <FeatherIcon icon="sliders" />
+      <ul>
+        <Setting />
+      </ul>
     </nav>
   );
 };

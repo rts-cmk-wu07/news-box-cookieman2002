@@ -51,3 +51,18 @@
     transform: rotate(360deg);
   }
 }
+#react-burger-menu-btn {
+  width: 25px !important;
+
+  height: 25px !important;
+
+  top: 0 !important;
+
+  right: 0 !important;
+
+  left: auto !important;
+}
+
+.bm-burger-bars {
+  display: none;
+}

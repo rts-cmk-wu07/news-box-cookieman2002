@@ -6,7 +6,6 @@ import App from "./App";
 import Archive from "./pages/Archive";
 import Indbox from "./pages/Indbox";
 import Notfound from "./pages/NotFound";
-import Setting from "./pages/Setting";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,7 +13,6 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="/setting" element={<Setting />} />
           <Route path="/archive" element={<Archive />} />
           <Route path="/indbox" element={<Indbox />} />
           <Route path="*" element={<Notfound />} />
