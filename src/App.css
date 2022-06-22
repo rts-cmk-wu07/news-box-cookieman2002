@@ -51,18 +51,42 @@
     transform: rotate(360deg);
   }
 }
-#react-burger-menu-btn {
-  width: 25px !important;
-
-  height: 25px !important;
-
-  top: 0 !important;
-
-  right: 0 !important;
-
-  left: auto !important;
+.bm-burger-button {
+  position: relative;
+  width: 36px;
+  height: 30px;
+  
 }
-
 .bm-burger-bars {
-  display: none;
+  background: #373a47;
+}
+.bm-menu {
+  background: #373a47;
+  
+  font-size: 1.15em;
+}
+#page-wrap {
+ 
+
+  /* Prevent sidebar from showing a scrollbar on page */
+  overflow: auto;
+}
+.bm-morph-shape {
+  fill: #373a47;
+}
+.bm-cross {
+  background: #bdc3c7;
+}
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+.bm-item {
+  display: inline-block;
+
+  /* Our sidebar item styling */
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: #d1d1d1;
+  transition: color 0.2s;
 }

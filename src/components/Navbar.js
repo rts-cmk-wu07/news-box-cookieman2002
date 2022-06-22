@@ -2,11 +2,11 @@
 import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
 import FeatherIcon from "feather-icons-react";
-import LightSwitch from "./Lightswitch";
+
 import { ThemeContext } from "../contexts/context";
 import { useContext } from "react";
 import { vars } from "./variables";
-import { stack as Menu } from "react-burger-menu";
+
 import Setting from "./Setting";
 
 const Navbar = () => {
@@ -21,11 +21,7 @@ const Navbar = () => {
       border-bottom: 2px solid ${isSwitch.darkmode ? "#2f3136" : "#f2f2f2"};
       transition-duration: 1s;
       justify-content: space-between;
-      & button {
-        background-color: ${isSwitch.darkmode ? vars.primary_3 : vars.typo_3};
-        border: none;
-        transition-duration: 1s;
-      }
+      
       & h1 {
         transition-duration: 0.05s;
         color: ${isSwitch.darkmode ? vars.typo_3 : vars.primary_3};
@@ -42,20 +38,21 @@ const Navbar = () => {
   };
   return (
     <nav css={styles.navbar}>
+      <ul>
+        <Setting  pageWrapId={"page-wrap"} outerContainerId={"App"}/>
+        
+      </ul>
+      <Link to="indbox" css={styles.links}>
+        <h1>Newsbox</h1>
+      </Link>
       <Link to="archive" css={styles.links}>
         <FeatherIcon
           icon="inbox"
           stroke={isSwitch.darkmode ? "white" : "black"}
         />
       </Link>
-      <Link to="indbox" css={styles.links}>
-        <h1>Newsbox</h1>
-      </Link>
 
-      <FeatherIcon icon="sliders" />
-      <ul>
-        <Setting />
-      </ul>
+     
     </nav>
   );
 };

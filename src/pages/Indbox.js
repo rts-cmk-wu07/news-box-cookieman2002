@@ -1,7 +1,9 @@
 import Usefetch from "../hooks/Usefetch";
-// import { useState } from "react";
+import { useState } from "react";
 import Section from "../components/Section";
+import { TopicContext } from "../contexts/context";
 const Indbox = () => {
+  
   const key = "PorNsbssWGT719UfIj07BezGGZ1kzBHK";
   const { error, isPending, data } =
     Usefetch(`https://api.nytimes.com/svc/topstories/v2/home.json?api-key=${key}
@@ -15,6 +17,7 @@ const Indbox = () => {
         {isPending && <div>Loading...</div>}
         {data && <Section posts={data} title="inbox"/>}
       </div>
+     
     </div>
   );
 };

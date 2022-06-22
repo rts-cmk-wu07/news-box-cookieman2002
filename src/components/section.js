@@ -60,7 +60,7 @@ const Section = ({ posts, title }) => {
     `,
   };
   const [query, setQuery] = useState("");
-  var storedata = [];
+
   // const handlers = useSwipeable({ onSwipedLeft: () => console.log("swiped") });
 
   let topics = posts.map((topic) => topic.section);
@@ -101,7 +101,7 @@ const Section = ({ posts, title }) => {
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Search here"
       />
-      {console.log(query)}
+    
 
       {sortedTopics
         .filter((val) => {
