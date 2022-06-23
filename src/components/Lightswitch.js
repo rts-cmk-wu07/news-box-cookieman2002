@@ -7,7 +7,10 @@ import { useContext } from "react";
 const LightSwitch = (props) => {
   const { isSwitch, setIsSwitch } = useContext(ThemeContext);
   const styles = {
-    
+    lightSwitch: css`
+    background-color: #373a47;
+    border: none;
+    `
   };
 
   return (
