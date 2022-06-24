@@ -9,7 +9,7 @@ import { vars } from "./variables";
 
 import Setting from "./Setting";
 
-const Navbar = () => {
+const Navbar = ({ activeSections, setActiveSections, cats }) => {
   const { isSwitch } = useContext(ThemeContext);
 
   const styles = {
@@ -21,7 +21,7 @@ const Navbar = () => {
       border-bottom: 2px solid ${isSwitch.darkmode ? "#2f3136" : "#f2f2f2"};
       transition-duration: 1s;
       justify-content: space-between;
-      
+
       & h1 {
         transition-duration: 0.05s;
         color: ${isSwitch.darkmode ? vars.typo_3 : vars.primary_3};
@@ -36,11 +36,18 @@ const Navbar = () => {
       transition-duration: 1s;
     `,
   };
+  
+  
   return (
     <nav css={styles.navbar}>
       <ul>
-        <Setting  pageWrapId={"page-wrap"} outerContainerId={"App"}/>
-        
+        <Setting
+          pageWrapId={"page-wrap"}
+          outerContainerId={"App"}
+          cats={cats}
+          setActiveSections={setActiveSections}
+          activeSections={activeSections}
+        />
       </ul>
       <Link to="indbox" css={styles.links}>
         <h1>Newsbox</h1>
@@ -51,8 +58,6 @@ const Navbar = () => {
           stroke={isSwitch.darkmode ? "white" : "black"}
         />
       </Link>
-
-     
     </nav>
   );
 };

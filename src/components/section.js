@@ -14,7 +14,13 @@ import "react-swipeable-list/dist/styles.css";
 // import { useSwipeable } from "react-swipeable";
 // import { LeadingActions } from "react-swipeable-list";
 
-const Section = ({ posts, title }) => {
+const Section = ({
+  posts,
+  title,
+  isActive,
+  activeSections,
+  setActiveSections,
+}) => {
   const { isSwitch } = useContext(ThemeContext);
   const styles = {
     archive: css`
@@ -59,23 +65,24 @@ const Section = ({ posts, title }) => {
       align-self: center;
     `,
   };
-  const [query, setQuery] = useState("");
-
-  // const handlers = useSwipeable({ onSwipedLeft: () => console.log("swiped") });
+  // const [query, setQuery] = useState("");
 
   let topics = posts.map((topic) => topic.section);
-
-  // console.log(posts[0].multimedia[0].url);
-
   let sortedTopics = topics.filter((element, index) => {
     return topics.indexOf(element) === index;
   });
+  // console.log(topics);
+  // console.log(sortedTopics);
+  var blar =
+    activeSections &&
+    sortedTopics.filter((topic) => activeSections.includes(topic));
+  // console.log(activeSections);
+
+  // console.log(sortedTopics);
   let imagesfix = (image) => {
     if (image === null) {
-      // console.log("image if:" + image.url);
       return <div>no Image</div>;
     } else {
-      // console.log("image:" + image.url);
       return <img src={image.url} alt="" />;
     }
   };
@@ -98,57 +105,49 @@ const Section = ({ posts, title }) => {
       <h1 css={styles.title}>{title}</h1>
       <input
         type="text"
-        onChange={(event) => setQuery(event.target.value)}
+        // onChange={(event) => setQuery(event.target.value)}
         placeholder="Search here"
       />
-    
 
-      {sortedTopics
-        .filter((val) => {
-          if (query === "") {
-            return val;
-          } else if (val.title.toLowerCase().includes(query.toLowerCase())) {
-            return val;
-          }
-          return false;
-        })
-        .map((topic, index) => (
-          <section css={styles.topics} key={index}>
-            <h1>{topic}</h1>
-            {posts.map(
-              (story, index) =>
-                story.section === topic && (
-                  <div key={index} css={styles.post}>
-                    <SwipeableList>
-                      <SwipeableListItem
-                        leadingActions={
-                          <LeadingActions>
-                            <SwipeAction
-                              css={styles.archive}
-                              onClick={() => archiveitem(story)}
-                            >
-                              Archive
-                            </SwipeAction>
-                          </LeadingActions>
-                        }
-                      >
-                        {(story.multimedia !== null &&
-                          imagesfix(story.multimedia[0])) || (
-                          <div>No image </div>
-                        )}
-                        {/* {imagesfix(story.multimedia[0])} */}
-                        <div>
-                          <h2>{story.title}</h2>
-                          <p>{story.subsection}</p>
-                          <p>{story.published_date}</p>
-                        </div>
-                      </SwipeableListItem>
-                    </SwipeableList>
-                  </div>
-                )
-            )}
-          </section>
-        ))}
+      {sortedTopics.map((topic, index) => (
+        <section
+          css={styles.topics}
+          className={isActive ? "active" : null}
+          key={index}
+        >
+          <h1>{topic}</h1>
+          {posts.map(
+            (story, index) =>
+              story.section === topic && (
+                <div key={index} css={styles.post}>
+                  <SwipeableList>
+                    <SwipeableListItem
+                      leadingActions={
+                        <LeadingActions>
+                          <SwipeAction
+                            css={styles.archive}
+                            onClick={() => archiveitem(story)}
+                          >
+                            Archive
+                          </SwipeAction>
+                        </LeadingActions>
+                      }
+                    >
+                      {(story.multimedia !== null &&
+                        imagesfix(story.multimedia[0])) || <div>No image </div>}
+                      {/* {imagesfix(story.multimedia[0])} */}
+                      <div>
+                        <h2>{story.title}</h2>
+                        <p>{story.subsection}</p>
+                        <p>{story.published_date}</p>
+                      </div>
+                    </SwipeableListItem>
+                  </SwipeableList>
+                </div>
+              )
+          )}
+        </section>
+      ))}
     </div>
   );
 };
